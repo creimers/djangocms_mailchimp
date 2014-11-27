@@ -1,0 +1,70 @@
+<div class="mailchimp-plugin-wrapper">
+	
+	<form action="http://{{pre}}.us3.list-manage1.com/subscribe/post-json?u={{api_key}}&amp;id={{id}}&amp;c=?" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate form-horizontal" novalidate="">
+
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+			<div class="col-sm-10">
+				<input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="Email-Adresse" required="">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button class="btn btn-default" type="submit" id="mc-embedded-subscribe">Abonnieren</button>
+			</div>  
+		</div>
+
+	</form>
+	<div id="newsletter-message">
+	
+	</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function () {
+	console.log('hallo welt!');
+
+	$(function () {
+	  var $form = $('#mc-embedded-subscribe-form');
+	 
+	  $('#mc-embedded-subscribe').on('click', function(event) {
+	    event.preventDefault();
+	    register($form);
+	  });
+	});
+
+	function register($form) {
+	  $.ajax({
+	    type: $form.attr('method'),
+	    url: $form.attr('action'),
+	    data: $form.serialize(),
+	    cache       : false,
+	    dataType    : 'json',
+	    contentType: "application/json; charset=utf-8",
+	    error       : function(err) { $('#newsletter-message').html('Could not connect to server. Please try again later.'); },
+	    success     : function(data) {
+	    console.log(data);
+
+	      if (data.result != "success") {
+	        var message = data.msg.substring(4);
+	        $('#newsletter-message').html('<span>'+message+'</span>');
+	        $('#newsletter-message').removeClass('alert-success');
+	        $('#newsletter-message').addClass('alert-danger');
+	        $('#newsletter-message').slideDown	();
+	      } 
+	 
+	      else {
+	        var message = data.msg;
+	        $('#newsletter-message').html('<span>'+message+'</span>');
+	        $('#newsletter-message').removeClass('alert-success');
+	        $('#newsletter-message').addClass('alert-success');
+	        $('#newsletter-message').slideDown	();
+	      }
+	    }
+	  });
+	}
+});
+</script>
