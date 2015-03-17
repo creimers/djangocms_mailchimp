@@ -18,7 +18,7 @@
 		</div>
 
 	</form>
-	<div id="newsletter-message">
+	<div id="newsletter-message" class="alert">
 	
 	</div>
 </div>
@@ -45,15 +45,14 @@ $(document).ready(function () {
 	    dataType    : 'json',
 	    contentType: "application/json; charset=utf-8",
 	    error       : function(err) { $('#newsletter-message').html('Could not connect to server. Please try again later.'); },
-	    success     : function(data) {
-	    console.log(data);
+	    success: function(data) {
 
 	      if (data.result != "success") {
 	        var message = data.msg.substring(4);
 	        $('#newsletter-message').html('<span>'+message+'</span>');
 	        $('#newsletter-message').removeClass('alert-success');
 	        $('#newsletter-message').addClass('alert-danger');
-	        $('#newsletter-message').slideDown	();
+	        $('#newsletter-message').fadeIn().delay(5000).fadeOut();
 	      } 
 	 
 	      else {
@@ -61,8 +60,10 @@ $(document).ready(function () {
 	        $('#newsletter-message').html('<span>'+message+'</span>');
 	        $('#newsletter-message').removeClass('alert-success');
 	        $('#newsletter-message').addClass('alert-success');
-	        $('#newsletter-message').slideDown	();
+	        $('#newsletter-message').fadeIn().delay(5000).fadeOut();
+          $('#mce-EMAIL').val('');
 	      }
+
 	    }
 	  });
 	}
