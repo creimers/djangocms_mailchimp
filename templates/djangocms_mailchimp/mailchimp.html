@@ -1,3 +1,5 @@
+{% load sekizai_tags staticfiles %}
+
 <div class="mailchimp-plugin-wrapper">
 	
 	<form action="http://{{pre}}.us3.list-manage1.com/subscribe/post-json?u={{api_key}}&amp;id={{id}}&amp;c=?" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate form-horizontal" novalidate="">
@@ -21,11 +23,12 @@
 	</div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+{% addtoblock "js" %}
+<script type="text/javascript" charset="utf-8" src="{{STATIC_URL}}bower_components/jquery/dist/jquery.min.js"></script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
 <script>
-
 $(document).ready(function () {
-	console.log('hallo welt!');
 
 	$(function () {
 	  var $form = $('#mc-embedded-subscribe-form');
@@ -68,3 +71,4 @@ $(document).ready(function () {
 	}
 });
 </script>
+{% endaddtoblock "js" %}

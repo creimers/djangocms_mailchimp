@@ -1,0 +1,13 @@
+{
+  "name": "djangocms_mailchimp",
+  "version": "0.0.0",
+  "homepage": "https://github.com/creimers/djangocms_mailchimp",
+  "authors": [
+    "Christoph Reimers <christoph@superservice-international.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.3"
+  }
+}
